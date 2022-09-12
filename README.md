@@ -9,3 +9,4 @@ IXD 617 Advanced Tech: Mobile Web
 
 ### Assignment Links
 - https://hdraws.com/aau/IXD617/profile/
+- https://hdraws.com/aau/IXD617/csszengarden/
