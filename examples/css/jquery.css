@@ -1,3 +1,5 @@
+
+/* ACCORDION */
 .accordion {
     /* font-size:2em */
 }
@@ -18,4 +20,60 @@
 }
 .accordion dt ~ dt {
     margin-top: 1em;
+}
+
+
+/* TAB GROUP */
+.tabgroup {
+    height:40vh;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+}
+.tabset {
+    display:flex;
+    line-height:3em;
+    flex: none;
+}
+.tab {
+    padding: 0 1em;
+    position: relative;
+    cursor: pointer;
+}
+.tab:hover {
+    background-color:#eee;
+}
+.tab::after {
+    content:'';
+    height:0;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    background-color:rgb(64, 140, 212);
+    transition:all 0.3s;
+}
+.tab.active::after {
+    height:3px;
+}
+.contentset {
+    flex: 1 1 100%;
+    overflow:hidden;
+    position:relative;
+}
+.content {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color:white;
+    overflow:auto;
+    opacity:0;
+    pointer-events: none;
+    transition:all 0.3s;
+}
+.content.active {
+    pointer-events: initial;
+    opacity:1;
 }
