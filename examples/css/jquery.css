@@ -1,0 +1,21 @@
+.accordion {
+    /* font-size:2em */
+}
+.accordion dt {
+    background-color: #b8d9f5;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    cursor: pointer;
+}
+.accordion dd {
+    padding: 1em;
+    margin-inline-start: 0;
+    border: 2px solid #b8d9f5;
+    border-top-width: 0;
+    display:none;
+}
+.accordion dt ~ dt {
+    margin-top: 1em;
+}
