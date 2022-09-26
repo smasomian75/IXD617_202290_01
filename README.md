@@ -13,3 +13,4 @@ IXD 617 Advanced Tech: Mobile Web
 
 ### Example Files
 - https://hdraws.com/aau/IXD617/examples/jquery.html
+- https://hdraws.com/aau/IXD617/examples/jquery-mobile.html
