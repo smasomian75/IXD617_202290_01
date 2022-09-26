@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Example</title>
+
+    <link rel="stylesheet" href="../lib/css/jquery.mobile.structure-1.4.5.min.css">
+
+    <script src="../lib/js/jquery-2.2.4.min.js"></script>
+    <script src="../lib/js/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+    <section data-role="page" id="page1">
+        <header data-role="header">
+            <h1>Page1</h1>
+        </header>
+        <div data-role="main">
+            <!-- All content goes here -->
+            <h2>This is Page1</h2>
+
+            <ul>
+                <li>
+                    <a href="#page2">Page2</a>
+                </li>
+                <li>
+                    <a href="#page3">Page3</a>
+                </li>
+            </ul>
+        </div>
+        <footer data-role="footer">
+            <h1>Navigation</h1>
+        </footer>
+    </section>
+
+    <section data-role="page" id="page2">
+        <header data-role="header">
+            <h1>Page2</h1>
+        </header>
+        <div data-role="main">
+            <!-- All content goes here -->
+            <h2>This is Page2</h2>
+
+            <ul>
+                <li>
+                    <a href="#page1">Page1</a>
+                </li>
+                <li>
+                    <a href="#page3">Page3</a>
+                </li>
+            </ul>
+        </div>
+        <footer data-role="footer">
+            <h1>Navigation</h1>
+        </footer>
+    </section>
+
+    <section data-role="page" id="page3">
+        <header data-role="header">
+            <h1>Page3</h1>
+            <a href="#" data-rel="back">Back</a>
+        </header>
+        <div data-role="main">
+            <!-- All content goes here -->
+            <h2>This is Page3</h2>
+        </div>
+        <footer data-role="footer">
+            <h1>Navigation</h1>
+        </footer>
+    </section>
+</body>
+</html>
