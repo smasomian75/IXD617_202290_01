@@ -11,21 +11,59 @@
     
     <script src="lib/js/jquery-2.2.4.min.js"></script>
     <script src="src/js/app.js"></script>
+    <script src="src/js/signin.js"></script>
     <script src="lib/js/jquery.mobile-1.4.5.min.js"></script>
 </head>
 <body>
 
 
     <section data-role="page" id="signin-page">
-        <div data-role="main">
-            <form>
-                <input type="text">
-                <input type="password">
-                <button class="form-button">Sign In</button>
-            </form>
-            <div>
-                <a href="#recent-page" class="form-button">Sign In</a>
+        <div data-role="main" class="display-flex flex-column">
+            <div class="flex-stretch signin-hero">
+                <img src="images/icons/dice.svg" alt="" class="hero-icon">
             </div>
+            <form class="form" id="signin-form" data-ajax="false">
+                <div class="warning"></div>
+                <div class="form-control">
+                    <label class="form-label" for="signin-username">Username</label>
+                    <input class="form-input" type="text" id="signin-username" data-role="none" placeholder="Type your Username">
+                </div>
+                <div class="form-control">
+                    <label class="form-label" for="signin-password">Password</label>
+                    <input class="form-input" type="text" id="signin-password" data-role="none" placeholder="Type your Password">
+                </div>
+                <div class="form-control">
+                    <input type="submit" class="form-button" value="Click me" data-role="none">
+                </div>
+                <div class="form-control" style="text-align:center; font-size: 0.7em">
+                    Don't have an account? <a href="#signup-page">Sign Up!</a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section data-role="page" id="signup-page">
+        <div data-role="main" class="display-flex flex-column flex-justify-center">
+            <form class="form" id="signup-form" data-ajax="false">
+                <div class="form-control">
+                    <label class="form-label" for="signup-username">Username</label>
+                    <input class="form-input" type="text" id="signup-username" data-role="none" placeholder="Type your Username">
+                </div>
+                <div class="form-control">
+                    <label class="form-label" for="signup-password">Type a Password</label>
+                    <input class="form-input" type="text" id="signup-password" data-role="none" placeholder="Type your Password">
+                </div>
+                <div class="form-control">
+                    <label class="form-label" for="signup-confirm">Confirm Password</label>
+                    <input class="form-input" type="text" id="signup-confirm" data-role="none" placeholder="Type your Password">
+                </div>
+                <div class="form-control">
+                    <input type="submit" class="form-button" value="Click me" data-role="none">
+                </div>
+                <div class="form-control" style="text-align:center; font-size: 0.7em">
+                    Already have an account? <a href="#signin-page">Sign In!</a>
+                </div>
+            </form>
         </div>
     </section>
 
