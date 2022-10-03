@@ -130,6 +130,7 @@ a {
 
 .flex-column { flex-direction:column; }
 
+.overscroll { overflow: auto; }
 
 
 
@@ -189,4 +190,147 @@ a {
     width: 80vw;
     aspect-ratio: 1 / 1;
 
+}
+
+
+.map {
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../images/map.png');
+    background-position: center;
+    background-size: cover;
+}
+
+
+
+
+
+
+/* FLOATER */
+.floater { position:absolute; }
+.floater.top { top: 1rem; }
+.floater.right { right: 1rem; }
+.floater.bottom { bottom: 1rem; }
+.floater.left { left: 1rem; }
+
+.btn-circle {
+    border-radius: 2rem;
+    line-height: 3rem;
+    font-size:2.5em;
+    width: 3rem;
+    height: 3rem;
+    text-align:center;
+    background-color:white;
+    display: block;
+    box-shadow: 0.1em 0.1em 0.2em rgba(0,0,0,0.2);
+}
+
+
+/* MODAL */
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition: all 0.3s;
+    opacity: 0;
+    z-index: 10;
+}
+.modal.active {
+    opacity: 1;
+    pointer-events: initial;
+}
+
+
+
+.modal-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+.modal-back.transparent {
+    background-color: transparent;
+}
+
+
+
+.modal-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% + 3em));
+    width: 80vw;
+    max-height: 60vh;
+    display:flex;
+    flex-direction: column;
+    border-radius: 0.3em;
+    overflow:hidden;
+    transition: all 0.3s;
+}
+.modal.active .modal-popup {
+    transform: translate(-50%, -50%);
+}
+
+
+.modal-drawer {
+    position: absolute;
+    display:flex;
+    flex-direction: column;
+    overflow:hidden;
+    transition: all 0.3s;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.modal-drawer.right,
+.modal-drawer.left {
+    height: 100%;
+    width: 70vw;
+}
+.modal-drawer.right { right: 0; transform: translateX(100%); }
+.modal-drawer.left { left: 0; transform: translateX(-100%); }
+
+.modal-drawer.top,
+.modal-drawer.bottom {
+    height: 40vh;
+    width: 100%;
+}
+.modal-drawer.top { top: 0; transform: translateY(-100%); }
+.modal-drawer.bottom { bottom: 0; transform: translateY(100%); }
+.modal.active .modal-drawer {
+    transform: translate(0);
+}
+
+
+
+
+.modal-head,
+.modal-foot {
+    background-color: var(--color-neutral-lighter);
+    padding: 0.5em 1em;
+}
+.modal-body {
+    background-color: white;
+    padding: 1em;
+    flex: 1 1 100%;
+    overflow: auto;
+}
+
+
+
+
+/* ANIMAL LIST */
+.animallist {
+    height: 100%;
+    position:relative;
+    overflow:auto;
+
+    padding: 1em;
 }

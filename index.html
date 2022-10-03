@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-control">
                     <label class="form-label" for="signin-password">Password</label>
-                    <input class="form-input" type="text" id="signin-password" data-role="none" placeholder="Type your Password">
+                    <input class="form-input" type="password" id="signin-password" data-role="none" placeholder="Type your Password">
                 </div>
                 <div class="form-control">
                     <input type="submit" class="form-button" value="Click me" data-role="none">
@@ -51,11 +51,11 @@
                 </div>
                 <div class="form-control">
                     <label class="form-label" for="signup-password">Type a Password</label>
-                    <input class="form-input" type="text" id="signup-password" data-role="none" placeholder="Type your Password">
+                    <input class="form-input" type="password" id="signup-password" data-role="none" placeholder="Type your Password">
                 </div>
                 <div class="form-control">
                     <label class="form-label" for="signup-confirm">Confirm Password</label>
-                    <input class="form-input" type="text" id="signup-confirm" data-role="none" placeholder="Type your Password">
+                    <input class="form-input" type="password" id="signup-confirm" data-role="none" placeholder="Type your Password">
                 </div>
                 <div class="form-control">
                     <input type="submit" class="form-button" value="Click me" data-role="none">
@@ -71,7 +71,19 @@
     <!-- RECENT PAGE -->
     <section data-role="page" id="recent-page">
         <div data-role="main">
-            MAP!
+            <div class="map"></div>
+
+            <div class="floater top left">
+                <a href="#" class="btn-circle" data-activate="#recent-add-modal">☰</a>
+            </div>
+
+            <div id="recent-add-modal" class="modal">
+                <div class="modal-back transparent" data-deactivate="#recent-add-modal"></div>
+                <div class="modal-drawer left">
+                    <div class="modal-head">Head</div>
+                    <div class="modal-body">Body</div>
+                </div>
+            </div>
         </div>
         <footer data-role="footer">
             <ul>
@@ -86,20 +98,75 @@
     <!-- LIST PAGE -->
     <section data-role="page" id="list-page">
         <header data-role="header">
-            Animal List
+            <h1>Animal List</h1>
         </header>
         <div data-role="main">
-            <!-- div.animallist-item*10>a[href="#animal-profile-page"]>{Animal $} -->
-            <div class="animallist-item"><a href="#animal-profile-page">Animal 1</a></div>
-            <div class="animallist-item"><a href="#animal-profile-page">Animal 2</a></div>
-            <div class="animallist-item"><a href="#animal-profile-page">Animal 3</a></div>
-            <div class="animallist-item"><a href="#animal-profile-page">Animal 4</a></div>
-            <div class="animallist-item"><a href="#animal-profile-page">Animal 5</a></div>
-            <div class="animallist-item"><a href="#animal-profile-page">Animal 6</a></div>
-            <div class="animallist-item"><a href="#animal-profile-page">Animal 7</a></div>
-            <div class="animallist-item"><a href="#animal-profile-page">Animal 8</a></div>
-            <div class="animallist-item"><a href="#animal-profile-page">Animal 9</a></div>
-            <div class="animallist-item"><a href="#animal-profile-page">Animal 10</a></div>
+            <div class="animallist">
+                <!-- div.animallist-item*10>a[href="#animal-profile-page"]>{Animal $} -->
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 1</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 2</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 3</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 4</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 5</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 6</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 7</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 8</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 9</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 10</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 1</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 2</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 3</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 4</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 5</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 6</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 7</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 8</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 9</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 10</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 1</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 2</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 3</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 4</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 5</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 6</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 7</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 8</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 9</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 10</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 1</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 2</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 3</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 4</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 5</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 6</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 7</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 8</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 9</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 10</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 1</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 2</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 3</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 4</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 5</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 6</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 7</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 8</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 9</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 10</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 1</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 2</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 3</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 4</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 5</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 6</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 7</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 8</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 9</a></div>
+                <div class="animallist-item"><a href="#animal-profile-page">Animal 10</a></div>
+            </div>
+            <div class="floater bottom right">
+                <a href="#" class="btn-circle" data-activate="#list-add-modal">&plus;</a>
+            </div>
         </div>
         <footer data-role="footer">
             <ul>
@@ -108,13 +175,25 @@
                 <li><a href="#user-profile-page">Profile</a></li>
             </ul>
         </footer>
+
+        <div id="list-add-modal" class="modal">
+            <div class="modal-back" data-deactivate="#list-add-modal"></div>
+            <div class="modal-popup">
+                <div class="modal-head">Head</div>
+                <div class="modal-body">Body</div>
+                <div class="modal-foot">Foot</div>
+            </div>
+        </div>
     </section>
 
 
     <!-- USER PROFILE PAGE -->
     <section data-role="page" id="user-profile-page">
         <div data-role="main">
-            User Profile
+            <h1>User Profile</h1>
+            <div>
+                <a href="#" class="js-logout">Log out</a>
+            </div>
         </div>
         <footer data-role="footer">
             <ul>
