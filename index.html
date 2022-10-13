@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animal Tracker</title>
 
+    <meta name="mobile-web-app-capable" content="yes">
+	<link rel="shortcut icon" href="./icon_256x256.png" type="image/x-icon">
+    <link rel="icon" sizes="256x256" href="./icon_256x256.png">
+
     <!-- <link rel="stylesheet" href="lib/css/jquery.mobile.structure-1.4.5.min.css"> -->
     <link rel="stylesheet" href="src/css/app.css">
     
@@ -73,23 +77,24 @@
         <div data-role="main">
             <div class="map"></div>
 
-            <div class="floater top left">
-                <a href="#" class="btn-circle" data-activate="#recent-add-modal">☰</a>
-            </div>
-
-            <div id="recent-add-modal" class="modal">
-                <div class="modal-back transparent" data-deactivate="#recent-add-modal"></div>
-                <div class="modal-drawer left">
-                    <div class="modal-head">Head</div>
-                    <div class="modal-body">Body</div>
-                </div>
+            <div class="floater bottom right">
+                <a href="#choose-animal-page" class="btn-circle">&plus;</a>
             </div>
         </div>
         <footer data-role="footer">
             <ul>
-                <li><a href="#recent-page">Recent</a></li>
-                <li><a href="#list-page">List</a></li>
-                <li><a href="#user-profile-page">Profile</a></li>
+                <li><a href="#recent-page">
+                    <span class="footer-icon"><img class="icon" src="images/icons/map.svg"></span>
+                    <span class="footer-label">Recent</span>
+                </a></li>
+                <li><a href="#list-page">
+                    <span class="footer-icon"><img class="icon" src="images/icons/list.svg"></span>
+                    <span class="footer-label">List</span>
+                </a></li>
+                <li><a href="#user-profile-page">
+                    <span class="footer-icon"><img class="icon" src="images/icons/profile.svg"></span>
+                    <span class="footer-label">Profile</span>
+                </a></li>
             </ul>
         </footer>
     </section>
@@ -170,9 +175,16 @@
         </div>
         <footer data-role="footer">
             <ul>
-                <li><a href="#recent-page">Recent</a></li>
-                <li><a href="#list-page">List</a></li>
-                <li><a href="#user-profile-page">Profile</a></li>
+                <li><a href="#recent-page">
+                    <span class="footer-icon"><img class="icon" src="images/icons/map.svg"></span>
+                    <span class="footer-label">Recent</span>
+                </a></li>
+                <li><a href="#list-page">
+                    <span class="footer-icon"><img class="icon" src="images/icons/list.svg"></span>
+                    <span class="footer-label">List</span></a></li>
+                <li><a href="#user-profile-page">
+                    <span class="footer-icon"><img class="icon" src="images/icons/profile.svg"></span>
+                    <span class="footer-label">Profile</span></a></li>
             </ul>
         </footer>
 
@@ -187,6 +199,56 @@
     </section>
 
 
+
+
+    <!-- CHOOSE ANIMAL PAGE -->
+    <section data-role="page" id="choose-animal-page">
+        <header data-role="header">
+            <h1>Choose animal</h1>
+            <ul>
+                <li><a href="#" data-rel="back">Back</a></li>
+                <li class="flex-stretch"></li>
+                <li><a href="#choose-location-page">Next</a></li>
+            </ul>
+        </header>
+        <div data-role="main">
+            form for choose animal
+        </div>
+    </section>
+
+    <!-- CHOOSE LOCATION PAGE -->
+    <section data-role="page" id="choose-location-page">
+        <header data-role="header">
+            <h1>Choose Location</h1>
+            <ul>
+                <li><a href="#" data-rel="back">Back</a></li>
+                <li class="flex-stretch"></li>
+                <li><a href="#choose-description-page">Next</a></li>
+            </ul>
+        </header>
+        <div data-role="main">
+            <div class="map"></div>
+        </div>
+    </section>
+
+    <!-- CHOOSE LOCATION PAGE -->
+    <section data-role="page" id="choose-description-page">
+        <header data-role="header">
+            <h1>Description of Animal</h1>
+            <ul>
+                <li><a href="#" data-rel="back">Back</a></li>
+                <li class="flex-stretch"></li>
+                <li><a href="#list-page">Save</a></li>
+            </ul>
+        </header>
+        <div data-role="main">
+            for for description
+        </div>
+    </section>
+
+
+
+
     <!-- USER PROFILE PAGE -->
     <section data-role="page" id="user-profile-page">
         <div data-role="main">
@@ -197,9 +259,16 @@
         </div>
         <footer data-role="footer">
             <ul>
-                <li><a href="#recent-page">Recent</a></li>
-                <li><a href="#list-page">List</a></li>
-                <li><a href="#user-profile-page">Profile</a></li>
+                <li><a href="#recent-page">
+                    <span class="footer-icon"><img class="icon" src="images/icons/map.svg"></span>
+                    <span class="footer-label">Recent</span>
+                </a></li>
+                <li><a href="#list-page">
+                    <span class="footer-icon"><img class="icon" src="images/icons/list.svg"></span>
+                    <span class="footer-label">List</span></a></li>
+                <li><a href="#user-profile-page">
+                    <span class="footer-icon"><img class="icon" src="images/icons/profile.svg"></span>
+                    <span class="footer-label">Profile</span></a></li>
             </ul>
         </footer>
     </section>

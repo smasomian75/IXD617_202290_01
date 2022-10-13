@@ -334,3 +334,25 @@ a {
 
     padding: 1em;
 }
+
+
+
+
+[data-role="footer"] .icon {
+    width: 1.3rem;
+    height: 1.3rem;
+    vertical-align: middle;
+}
+[data-role="footer"] a {
+    line-height: 1rem;
+    color: inherit;
+}
+.footer-icon {
+    display: block;
+    line-height: 1.7rem;
+}
+.footer-label {
+    line-height: 1.3rem;
+    font-size: 0.6rem;
+    display: block;
+}
