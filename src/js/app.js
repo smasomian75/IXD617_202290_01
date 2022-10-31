@@ -1,12 +1,26 @@
+import { AnimalProfilePage, ListPage, RecentPage, UserProfilePage } from "./routes.js";
+import { checkSigninForm, checkUserId } from "./signin.js";
 
 // Document Ready
 $(() => {
 
     checkUserId();
 
-    // EVENT DELEGATION
     $(document)
 
+    .on("pagecontainerbeforeshow", function(event, ui) {
+        
+        /* PAGE ROUTES */
+        switch(ui.toPage[0].id) {
+            case "recent-page": RecentPage(); break;
+            case "list-page": ListPage(); break;
+            case "user-profile-page": UserProfilePage(); break;
+            case "animal-profile-page": AnimalProfilePage(); break;
+        }
+    })
+
+
+    // EVENT DELEGATION
     .on("submit", "#signin-form", function(e) {
         e.preventDefault();
         checkSigninForm();

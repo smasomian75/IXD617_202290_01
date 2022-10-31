@@ -1,15 +1,19 @@
+import { query } from "./functions.js";
 
 
-const checkSigninForm = () => {
+export const checkSigninForm = async() => {
     const userval = $("#signin-username").val();
     const passval = $("#signin-password").val();
 
-    console.log(userval, passval)
+    let founduser = await query({
+        type: 'check_signin',
+        params: [userval,passval]
+    });
 
-    if (userval === "user" && passval === "pass") {
+    if (founduser.result.length > 0) {
         // Logged In
         console.log("Success");
-        sessionStorage.userId = 3;
+        sessionStorage.userId = founduser.result[0].id;
 
         $("#signin-form")[0].reset();
     } else {
@@ -25,7 +29,7 @@ const checkSigninForm = () => {
 }
 
 
-const checkUserId = () => {
+export const checkUserId = () => {
     const pages = ["#signin-page", "#signup-page", ""];
 
     if (sessionStorage.userId === undefined) {
