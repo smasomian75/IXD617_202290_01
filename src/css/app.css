@@ -356,3 +356,76 @@ a {
     font-size: 0.6rem;
     display: block;
 }
+
+
+
+
+
+
+
+.animallist-item {
+    display: flex;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 15%);
+    margin: 1em 0;
+    border-radius: 1em;
+    overflow: hidden;
+    font-weight:normal;
+    color:inherit;
+}
+.animallist-image img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    object-position: center;
+    vertical-align: text-bottom;
+}
+.animallist-body {
+    padding: 1em;
+}
+.animallist-name {
+    font-size:1.3em;
+}
+
+
+
+
+#animal-profile-page [data-role="main"] {
+    display:flex;
+    flex-direction:column;
+}
+.animal-profile-top {
+    height:30vh;
+    flex:none;
+    background-position:center;
+    background-size:cover;
+}
+.animal-profile-nav {
+    flex:none;
+    line-height:var(--header-height);
+    display:flex;
+}
+.nav-link {
+    flex: 1 1 50%;
+    text-align: center;
+}
+.nav-link.active {
+    background-color:var(--color-main-light);
+}
+.animal-profile-bottom {
+    position:relative;
+    flex: 1 1 100%;
+}
+.animal-profile-section {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity:0;
+    pointer-events: none;
+    transition:all 0.3s;
+}
+.animal-profile-section.active {
+    opacity:1;
+    pointer-events: initial;
+}

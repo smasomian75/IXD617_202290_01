@@ -32,6 +32,28 @@ $(() => {
     })
 
 
+    .on("click", ".animal-jump", function(e) {
+        let id = $(this).data("id");
+
+        sessionStorage.animalId = id;
+    })
+    .on("click", ".location-jump", function(e) {
+        let id = $(this).data("id");
+
+        sessionStorage.locationId = id;
+    })
+
+
+    .on("click", ".nav-link", function(e) {
+        let id = $(this).index();
+        $(this).parent().next().children().eq(id)
+            .addClass("active")
+            .siblings().removeClass("active");
+        $(this).addClass("active")
+            .siblings().removeClass("active");
+    })
+
+
 
     // ACTIVATE TOOLS
     .on("click", "[data-activate]", function(e) {

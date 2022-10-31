@@ -53,7 +53,7 @@ function makeStatement($data) {
             return makeQuery($conn, "SELECT * FROM `track_202290_locations`", $params);
             
         case "user_by_id":
-            return makeQuery($conn, "SELECT * FROM `track_202290_users` WHERE `id`=?", $params);
+            return makeQuery($conn, "SELECT id,name,email,username,img,date_create FROM `track_202290_users` WHERE `id`=?", $params);
         case "animal_by_id":
             return makeQuery($conn, "SELECT * FROM `track_202290_animals` WHERE `id`=?", $params);
         case "location_by_id":

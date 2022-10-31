@@ -10,3 +10,8 @@ export const query = (options) => {
         else return d;
     });
 }
+
+// Curried function
+export const templater = (f) => (a) => 
+    (Array.isArray(a) ? a : [a])
+    .reduce((r,o,i,a) => r+f(o,i,a), '');
