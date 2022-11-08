@@ -1,5 +1,5 @@
 import { query } from "./functions.js"
-import { makeMap } from "./maps.js";
+import { makeMap, makeMarkers } from "./maps.js";
 import { makeAnimalList, makeAnimalProfileDescription, makeUserProfilePage } from "./parts.js";
 
 
@@ -34,8 +34,14 @@ export const RecentPage = async() => {
     });
     console.log(animal_locations);
 
-    makeMap("#recent-page .map");
+    let valid_animals = animal_locations.reduce((r,o)=>{
+        o.icon = o.img;
+        if (o.lat && o.lng) r.push(o);
+        return r;
+    },[])
 
+    let map_el = await makeMap("#recent-page .map");
+    makeMarkers(map_el,valid_animals);
 }
 
 export const ListPage = async() => {
@@ -78,4 +84,7 @@ export const AnimalProfilePage = async() => {
         params:[sessionStorage.animalId]
     });
     console.log(locations)
+
+    let map_el = await makeMap("#animal-profile-page .map");
+    makeMarkers(map_el,locations);
 }
