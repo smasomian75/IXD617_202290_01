@@ -20,7 +20,6 @@ export const makeUserProfilePage = ({name,email,username,img})=>`
         <div class="user-profile-breed">@${username}</div>
         <div class="user-profile-email">${email}</div>
     </div>
-    <a href="#" class="js-logout">Log out</a>
 </div>
 `
 
@@ -29,3 +28,88 @@ export const makeAnimalProfileDescription = ({name,type,breed})=>`
 <div>${type}</div>
 <div>${breed}</div>
 `
+
+
+export const makeAnimalMapDescription = ({name,type,breed,img}) => {
+    return `<div class="animal-map-description display-flex">
+        <div class="animal-map-image">
+            <img src="${img}" />
+        </div>
+        <div class="animal-map-body">
+            <h1>${name}</h1>
+            <div>${type}</div>
+            <div>${breed}</div>
+        </div>
+    </div>`;
+}
+
+
+
+export const makeEditUserForm = ({name,username,email}) => {
+    
+    return `<div class="form-control">
+        <label class="form-label" for="user-edit-username">Username</label>
+        <input class="form-input" type="text" id="user-edit-username" data-role="none" placeholder="Type your Username" value="${username}">
+    </div>
+    <div class="form-control">
+        <label class="form-label" for="user-edit-name">Name</label>
+        <input class="form-input" type="text" id="user-edit-name" data-role="none" placeholder="Type your Name" value="${name}">
+    </div>
+    <div class="form-control">
+        <label class="form-label" for="user-edit-email">Email</label>
+        <input class="form-input" type="text" id="user-edit-email" data-role="none" placeholder="Type your Email" value="${email}">
+    </div>`
+}
+
+
+
+
+const FormControlInput = ({namespace,name,displayname,type,placeholder,value}) => {
+    return `<div class="form-control">
+        <label class="form-label" for="${namespace}-${name}">${displayname}</label>
+        <input class="form-input" type="${type}" id="${namespace}-${name}" data-role="none" placeholder="${placeholder}" value="${value}">
+    </div>`
+}
+const FormControlTextarea = ({namespace,name,displayname,placeholder,value}) => {
+    return `<div class="form-control">
+        <label class="form-label" for="${namespace}-${name}">${displayname}</label>
+        <textarea class="form-input" id="${namespace}-${name}" data-role="none" placeholder="${placeholder}">${value}</textarea>
+    </div>`
+}
+
+
+export const makeEditAnimalForm = ({animal,namespace}) => {
+    return `
+    ${FormControlInput({
+        namespace,
+        name: "name",
+        displayname: "Name",
+        type: "text",
+        placeholder: "Type a Name",
+        value: animal.name
+    })}
+    ${FormControlInput({
+        namespace,
+        name: "type",
+        displayname: "Type",
+        type: "text",
+        placeholder: "Type a Type",
+        value: animal.type
+    })}
+    ${FormControlInput({
+        namespace,
+        name: "breed",
+        displayname: "Breed",
+        type: "text",
+        placeholder: "Type a Breed",
+        value: animal.breed
+    })}
+    ${FormControlTextarea({
+        namespace,
+        name: "description",
+        displayname: "Description",
+        placeholder: "Type a Description",
+        value: animal.description
+    })}
+    `;
+}

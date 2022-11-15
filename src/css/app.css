@@ -134,6 +134,10 @@ a {
 
 
 
+.padded { padding:1em; }
+.full { height:100%; }
+
+
 
 /* FORMS */
 .form-control {
@@ -285,6 +289,15 @@ a {
     transition: all 0.3s;
     box-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
+.modal-drawer.island {
+    box-shadow: initial;
+}
+.modal-drawer.island .modal-body {
+    margin:1em;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    border-radius:1em;
+
+}
 
 .modal-drawer.right,
 .modal-drawer.left {
@@ -425,4 +438,63 @@ a {
 .animal-profile-section.active {
     opacity:1;
     pointer-events: initial;
+}
+
+
+
+
+.animal-map-description {
+    display:flex;
+}
+.animal-map-image img{
+    width:80px;
+    aspect-ratio: 1 / 1;
+    vertical-align: middle;
+    object-fit:cover;
+}
+.animal-map-body {
+    padding: 1em;
+}
+.animal-map-body h1 {
+    margin:0;
+}
+
+
+
+
+.user-profile-image img {
+    width:100%;
+    object-fit: cover;
+    aspect-ratio: 1/ 1;
+    border-radius: 50%;
+    padding:4em;
+}
+.user-profile-body {
+    padding:2em;
+}
+.user-profile-name {
+    font-weight:1.5em;
+}
+
+
+.icon {
+    font-size: 1em;
+    width: 1em;
+    height: 1em;
+}
+
+
+
+
+.settings {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.settings li {
+    padding: 0.5em 1em;
+
+}
+.settings li~li {
+    border-top: 1px solid var(--color-neutral-lighter);
 }

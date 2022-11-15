@@ -84,6 +84,15 @@
             <div class="floater bottom right">
                 <a href="#choose-animal-page" class="btn-circle">&plus;</a>
             </div>
+
+            
+
+            <div id="map-recent-modal" class="modal">
+                <div class="modal-back transparent" data-deactivate="#map-recent-modal"></div>
+                <div class="modal-drawer island top">
+                    <div class="modal-body"></div>
+                </div>
+            </div>
         </div>
         <footer data-role="footer">
             <ul>
@@ -191,9 +200,21 @@
 
 
 
+
+
+    
+
     <!-- USER PROFILE PAGE -->
     <section data-role="page" id="user-profile-page">
-        <div data-role="main"></div>
+        <div data-role="main">
+            <div class="body"></div>
+
+            <div class="floater top right">
+                <a href="#user-settings-page">
+                    <img class="icon" style="font-size:1.3em" src="images/icons/menu.svg" />
+                </a>
+            </div>
+        </div>
         <footer data-role="footer">
             <ul>
                 <li><a href="#recent-page">
@@ -209,6 +230,47 @@
             </ul>
         </footer>
     </section>
+
+    <!-- USER SETTINGS PAGE -->
+    <section data-role="page" id="user-settings-page">
+        <header data-role="header">
+            <h1>Settings</h1>
+            <ul>
+                <li><a href="#" data-rel="back">Back</a></li>
+            </ul>
+        </header>
+        <div data-role="main">
+            <div class="settings">
+                <li><a href="#user-edit-page">Edit User</a></li>
+                <li><a href="#" class="js-logout">Log out</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- USER EDIT PAGE -->
+    <section data-role="page" id="user-edit-page">
+        <header data-role="header">
+            <h1>Edit User</h1>
+            <ul>
+                <li><a href="#" data-rel="back">Back</a></li>
+                <li class="flex-stretch"></li>
+                <li><a href="#" data-rel="back" class="js-submit-user-edit-form">Submit</a></li>
+            </ul>
+        </header>
+        <form data-role="main" data-ajax="false" id="user-edit-form" class="padded display-flex flex-column full overscroll">
+            <div class="body"></div>
+            <div class="flex-stretch"></div>
+            
+            <div class="form-control">
+                <input class="form-button" type="submit" data-role="none" value="Submit">
+            </div>
+        </form>
+    </section>
+
+
+
+
+
 
 
     <!-- Animal PROFILE PAGE -->
@@ -234,6 +296,26 @@
                 <div class="animal-profile-section section-description"></div>
             </div>
         </div>
+    </section>
+
+    <!-- ANIMAL EDIT PAGE -->
+    <section data-role="page" id="animal-edit-page">
+        <header data-role="header">
+            <h1>Edit Animal</h1>
+            <ul>
+                <li><a href="#" data-rel="back">Back</a></li>
+                <li class="flex-stretch"></li>
+                <li><a href="#" data-rel="back" class="js-submit-animal-edit-form">Submit</a></li>
+            </ul>
+        </header>
+        <form data-role="main" data-ajax="false" id="animal-edit-form" class="padded display-flex flex-column full overscroll">
+            <div class="body"></div>
+            <div class="flex-stretch"></div>
+            
+            <div class="form-control">
+                <input class="form-button" type="submit" data-role="none" value="Submit">
+            </div>
+        </form>
     </section>
 
 
