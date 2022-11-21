@@ -53,7 +53,7 @@ function makeStatement($data) {
         //     return makeQuery($conn, "SELECT * FROM `track_202290_locations`", $params);
             
         case "user_by_id":
-            return makeQuery($conn, "SELECT id,name,email,username,img,date_create FROM `track_202290_users` WHERE `id`=?", $params);
+            return makeQuery($conn, "SELECT `id`,`name`,`email`,`username`,`img`,`date_create` FROM `track_202290_users` WHERE `id`=?", $params);
         case "animal_by_id":
             return makeQuery($conn, "SELECT * FROM `track_202290_animals` WHERE `id`=?", $params);
         case "location_by_id":
@@ -95,6 +95,90 @@ function makeStatement($data) {
             WHERE `user_id`=?
             ORDER BY l.animal_id, l.date_create DESC
             ", $params);
+
+
+
+
+
+        /* INSERT */
+
+        case "insert_animal":
+            $result = makeQuery($conn, "INSERT INTO
+            `track_202290_animals`
+            (
+                `user_id`,
+                `name`,
+                `type`,
+                `breed`,
+                `description`,
+                `img`,
+                `date_create`
+            )
+            VALUES
+            (
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                'https://via.placeholder.com/400/?text=ANIMAL',
+                NOW()
+            )
+            ", $params, false);
+
+            if (isset($result['error'])) return $result;
+            return ["result"=>"Success"];
+
+
+
+
+
+
+        /* UPDATE */
+
+        case "update_user":
+            $result = makeQuery($conn, "UPDATE
+            `track_202290_users`
+            SET
+                `name` = ?,
+                `username` = ?,
+                `email` = ?
+            WHERE `id` = ?
+            ", $params, false);
+
+            if (isset($result['error'])) return $result;
+            return ["result"=>"Success"];
+            
+        case "update_password":
+            $result = makeQuery($conn, "UPDATE
+            `track_202290_users`
+            SET
+                `password` = md5(?)
+            WHERE `id` = ?
+            ", $params, false);
+
+            if (isset($result['error'])) return $result;
+            return ["result"=>"Success"];
+
+        case "update_animal":
+            $result = makeQuery($conn, "UPDATE
+            `track_202290_animals`
+            SET
+                `name` = ?,
+                `type` = ?,
+                `breed` = ?,
+                `description` = ?
+            WHERE `id` = ?
+            ", $params, false);
+
+            if (isset($result['error'])) return $result;
+            return ["result"=>"Success"];
+
+
+
+
+            
+        /* DELETE */
 
 
         

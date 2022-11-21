@@ -1,4 +1,4 @@
-import { checkUserEditForm } from "./forms.js";
+import { checkAnimalAddForm, checkAnimalEditForm, checkPasswordEditForm, checkUserEditForm } from "./forms.js";
 import { AnimalEditPage, AnimalProfilePage, ChooseLocationPage, ListPage, RecentPage, UserEditPage, UserProfilePage } from "./routes.js";
 import { checkSigninForm, checkUserId } from "./signin.js";
 
@@ -23,6 +23,7 @@ $(() => {
             case "animal-edit-page": AnimalEditPage(); break;
 
             case "choose-location-page": ChooseLocationPage(); break;
+            case "location-edit-page": break;
         }
     })
 
@@ -35,6 +36,10 @@ $(() => {
     .on("submit", "#user-edit-form", function(e) {
         e.preventDefault();
         checkUserEditForm();
+    })
+    .on("submit", "#animal-edit-form", function(e) {
+        e.preventDefault();
+        checkAnimalEditForm();
     })
 
 
@@ -62,6 +67,15 @@ $(() => {
 
     .on("click", ".js-submit-user-edit-form", function(e) {
         checkUserEditForm();
+    })
+    .on("click", ".js-submit-password-edit-form", function(e) {
+        checkPasswordEditForm();
+    })
+    .on("click", ".js-submit-animal-add-form", function(e) {
+        checkAnimalAddForm();
+    })
+    .on("click", ".js-submit-animal-edit-form", function(e) {
+        checkAnimalEditForm();
     })
 
 

@@ -1,3 +1,7 @@
+import { query } from "./functions.js";
+
+
+
 
 
 
@@ -6,5 +10,93 @@ export const checkUserEditForm = () => {
     let username = $("#user-edit-username").val();
     let email = $("#user-edit-email").val();
 
-    console.log({name,username,email})
+    query({
+        type: 'update_user',
+        params: [
+            name,
+            username,
+            email,
+            sessionStorage.userId
+        ]
+    }).then((data)=>{
+        if (data.error) {
+            throw(data.error);
+        } else {
+            window.history.back();
+        }
+    })
+}
+export const checkPasswordEditForm = () => {
+    let password = $("#password-edit-password").val();
+    let confirm = $("#password-edit-confirm").val();
+
+    if (password !== confirm) {
+        // tell user to try again
+        return;
+    }
+
+    query({
+        type: 'update_password',
+        params: [
+            password,
+            sessionStorage.userId
+        ]
+    }).then((data)=>{
+        if (data.error) {
+            throw(data.error);
+        } else {
+            window.history.go(-1);
+        }
+    })
+}
+
+
+
+
+
+export const checkAnimalAddForm = () => {
+    let name = $("#animal-add-name").val();
+    let type = $("#animal-add-type").val();
+    let breed = $("#animal-add-breed").val();
+    let description = $("#animal-add-description").val();
+    
+    query({
+        type: 'insert_animal',
+        params: [
+            sessionStorage.userId,
+            name,
+            type,
+            breed,
+            description
+        ]
+    }).then((data)=>{
+        if (data.error) {
+            throw(data.error);
+        } else {
+            window.history.back();
+        }
+    })
+}
+export const checkAnimalEditForm = () => {
+    let name = $("#animal-edit-name").val();
+    let type = $("#animal-edit-type").val();
+    let breed = $("#animal-edit-breed").val();
+    let description = $("#animal-edit-description").val();
+    
+    query({
+        type: 'update_animal',
+        params: [
+            name,
+            type,
+            breed,
+            description,
+            sessionStorage.animalId
+        ]
+    }).then((data)=>{
+        if (data.error) {
+            throw(data.error);
+        } else {
+            window.history.back();
+        }
+    })
 }
