@@ -91,7 +91,14 @@ export const AnimalProfilePage = async() => {
 export const ChooseLocationPage = async() => {
     let map_el = await makeMap("#choose-location-page .map");
     makeMarkers(map_el,[]);
+    map_el.data("map").addListener("click",function(e){
+        console.log(e)
+        $("#location-lat").val(e.latLng.lat());
+        $("#location-lng").val(e.latLng.lng());
+        makeMarkers(map_el,[e.latLng]);
+    })
 }
+
 
 
 
@@ -106,6 +113,20 @@ export const UserEditPage = async() => {
 }
 
 
+
+
+
+export const AnimalAddPage = async() => {
+    $("#animal-add-page .body").html(makeEditAnimalForm({
+        animal:{
+            name:'',
+            type:'',
+            breed:'',
+            description:'',
+        },
+        namespace:'animal-add'
+    }));
+}
 export const AnimalEditPage = async() => {
     let {result:animals} = await query({
         type:"animal_by_id",

@@ -2,6 +2,35 @@ import { query } from "./functions.js";
 
 
 
+export const checkSignupForm = () => {
+    let username = $("#signup-username").val();
+    let email = $("#signup-email").val();
+    let password = $("#signup-password").val();
+    let confirm = $("#signup-confirm").val();
+    
+    if (password !== confirm) {
+        // tell user to try again
+        throw("password failed, show the user");
+        return;
+    }
+
+    query({
+        type: 'insert_user',
+        params: [
+            username,
+            email,
+            password
+        ]
+    }).then((data)=>{
+        if (data.error) {
+            throw(data.error);
+            // We should show how they failed to them
+        } else {
+            sessionStorage.userId = data.id;
+            $.mobile.navigate("#list-page");
+        }
+    })
+}
 
 
 
@@ -97,6 +126,41 @@ export const checkAnimalEditForm = () => {
             throw(data.error);
         } else {
             window.history.back();
+        }
+    })
+}
+export const checkAnimalDeleteForm = () => {
+    query({
+        type:"delete_animal",
+        params:[sessionStorage.animalId]
+    }).then((data)=>{
+        if (data.error) {
+            throw(data.error);
+        } else {
+            window.history.back();
+        }
+    })
+}
+
+
+
+export const checkLocationAddForm = () => {
+    let animalid = $("#location-animal-id").val();
+    let lat = $("#location-lat").val();
+    let lng = $("#location-lng").val();
+    let description = $("#location-description").val();
+
+    let back = +$("#location-back").val();
+
+    
+    query({
+        type:"insert_location",
+        params:[animalid,lat,lng,description]
+    }).then((data)=>{
+        if (data.error) {
+            throw(data.error);
+        } else {
+            window.history.go(back);
         }
     })
 }

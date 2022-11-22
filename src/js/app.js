@@ -1,5 +1,6 @@
-import { checkAnimalAddForm, checkAnimalEditForm, checkPasswordEditForm, checkUserEditForm } from "./forms.js";
-import { AnimalEditPage, AnimalProfilePage, ChooseLocationPage, ListPage, RecentPage, UserEditPage, UserProfilePage } from "./routes.js";
+import { checkAnimalAddForm, checkAnimalDeleteForm, checkAnimalEditForm, checkLocationAddForm, checkPasswordEditForm, checkSignupForm, checkUserEditForm } from "./forms.js";
+import { query } from "./functions.js";
+import { AnimalAddPage, AnimalEditPage, AnimalProfilePage, ChooseLocationPage, ListPage, RecentPage, UserEditPage, UserProfilePage } from "./routes.js";
 import { checkSigninForm, checkUserId } from "./signin.js";
 
 // Document Ready
@@ -20,6 +21,7 @@ $(() => {
             case "user-edit-page": UserEditPage(); break;
 
             case "animal-profile-page": AnimalProfilePage(); break;
+            case "animal-add-page": AnimalAddPage(); break;
             case "animal-edit-page": AnimalEditPage(); break;
 
             case "choose-location-page": ChooseLocationPage(); break;
@@ -32,6 +34,11 @@ $(() => {
     .on("submit", "#signin-form", function(e) {
         e.preventDefault();
         checkSigninForm();
+    })
+    .on("submit", "#signup-form", function(e) {
+        console.log("signup", e)
+        e.preventDefault();
+        checkSignupForm();
     })
     .on("submit", "#user-edit-form", function(e) {
         e.preventDefault();
@@ -63,6 +70,13 @@ $(() => {
 
         sessionStorage.locationId = id;
     })
+    .on("click", ".js-animal-delete", function(e) {
+        checkAnimalDeleteForm();
+    })
+    .on("click", ".js-choose-animal-for-location", function(e) {
+        $("#location-animal-id").val(sessionStorage.animalId);
+        $("#location-back").val(-2);
+    })
 
 
     .on("click", ".js-submit-user-edit-form", function(e) {
@@ -76,6 +90,9 @@ $(() => {
     })
     .on("click", ".js-submit-animal-edit-form", function(e) {
         checkAnimalEditForm();
+    })
+    .on("click", ".js-submit-location-add-form", function(e) {
+        checkLocationAddForm();
     })
 
 

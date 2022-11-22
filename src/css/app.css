@@ -421,6 +421,9 @@ a {
 .nav-link.active {
     background-color:var(--color-main-light);
 }
+.animal-profile-top {
+    position:relative;
+}
 .animal-profile-bottom {
     position:relative;
     flex: 1 1 100%;
