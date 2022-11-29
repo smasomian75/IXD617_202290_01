@@ -1,4 +1,5 @@
 import { query } from "./functions.js";
+import { makeAnimalList } from "./parts.js";
 
 
 
@@ -68,6 +69,23 @@ export const checkPasswordEditForm = () => {
         type: 'update_password',
         params: [
             password,
+            sessionStorage.userId
+        ]
+    }).then((data)=>{
+        if (data.error) {
+            throw(data.error);
+        } else {
+            window.history.go(-1);
+        }
+    })
+}
+export const checkUserEditPhotoForm = () => {
+    let photo = $("#user-edit-photo-image").val();
+    
+    query({
+        type: 'update_user_photo',
+        params: [
+            photo,
             sessionStorage.userId
         ]
     }).then((data)=>{
@@ -161,6 +179,37 @@ export const checkLocationAddForm = () => {
             throw(data.error);
         } else {
             window.history.go(back);
+        }
+    })
+}
+
+
+
+
+
+export const checkListSearchForm = (search) => {
+    query({
+        type:"search_animals",
+        params:[`%${search}%`,sessionStorage.userId]
+    }).then((data)=>{
+        if (data.error) {
+            throw(data.error);
+        } else {
+            let {result} = data;
+            $("#list-page .animallist").html(makeAnimalList(result))
+        }
+    })
+}
+export const checkListFilter = (filter,value) => {
+    query({
+        type:"filter_animals",
+        params:[filter,value,sessionStorage.userId]
+    }).then((data)=>{
+        if (data.error) {
+            throw(data.error);
+        } else {
+            let {result} = data;
+            $("#list-page .animallist").html(makeAnimalList(result));
         }
     })
 }

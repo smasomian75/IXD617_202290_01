@@ -14,7 +14,7 @@ export const makeAnimalList = templater(({id,name,type,breed,img})=>`
 
 export const makeUserProfilePage = ({name,email,username,img})=>`
 <div>
-    <div class="user-profile-image"><img src="${img}"></div>
+    <div class="user-profile-image"><a href="#user-edit-photo-page"><img src="${img}"></a></div>
     <div class="user-profile-body">
         <div class="user-profile-name">${name}</div>
         <div class="user-profile-breed">@${username}</div>
@@ -112,4 +112,24 @@ export const makeEditAnimalForm = ({animal,namespace}) => {
         value: animal.description
     })}
     `;
+}
+
+
+
+
+
+const filterList = (animals,type) => {
+    let arr = [...(new Set(animals.map(o=>o[type])))];
+    return templater(o=>o?`<span data-filter="${type}" data-value="${o}">${o}</span>`:'')(arr);
+}
+
+
+export const makeFilterList = (animals) => {
+    return `
+        <span data-filter="type" data-value="">All</span>
+        |
+        ${filterList(animals,'type')}
+        |
+        ${filterList(animals,'breed')}
+    `
 }
