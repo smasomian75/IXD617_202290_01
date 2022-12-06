@@ -106,6 +106,7 @@ export const checkAnimalAddForm = () => {
     let type = $("#animal-add-type").val();
     let breed = $("#animal-add-breed").val();
     let description = $("#animal-add-description").val();
+    let image = $("#animal-add-photo-image").val();
     
     query({
         type: 'insert_animal',
@@ -114,7 +115,8 @@ export const checkAnimalAddForm = () => {
             name,
             type,
             breed,
-            description
+            description,
+            image
         ]
     }).then((data)=>{
         if (data.error) {
@@ -129,6 +131,7 @@ export const checkAnimalEditForm = () => {
     let type = $("#animal-edit-type").val();
     let breed = $("#animal-edit-breed").val();
     let description = $("#animal-edit-description").val();
+    let image = $("#animal-edit-photo-image").val();
     
     query({
         type: 'update_animal',
@@ -137,6 +140,7 @@ export const checkAnimalEditForm = () => {
             type,
             breed,
             description,
+            image,
             sessionStorage.animalId
         ]
     }).then((data)=>{

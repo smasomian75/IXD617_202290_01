@@ -80,6 +80,12 @@ const FormControlTextarea = ({namespace,name,displayname,placeholder,value}) => 
 
 export const makeEditAnimalForm = ({animal,namespace}) => {
     return `
+    <div class="form-control">
+        <input type="hidden" id="${namespace}-photo-image" value="${animal.img??""}">
+        <label class="imagepicker replace thumbnail ${animal.img?"picked":""}" style="background-image:url('${animal.img}')">
+            <input type="file" id="${namespace}-photo-input" data-role="none" class="hidden">
+        </label>
+    </div>
     ${FormControlInput({
         namespace,
         name: "name",
