@@ -2,30 +2,29 @@
 
 function makeConn() {
     include_once "auth.php";
-    try {
+    try{
         $conn = new PDO(...Auth());
-        $conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+        $conn -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         return $conn;
-    } catch (PDOException $e) {
+    } catch(PDOException $e) {
         die('{"error":"'.$e->getMessage().'"}');
     }
 }
 
-
 function fetchAll($result) {
     $a = [];
-    while($row = $result->fetch(\PDO::FETCH_OBJ)) $a[] = $row;
+    while($row = $result ->fetch(\PDO::FETCH_OBJ)) $a[] = $row;
     return $a;
 }
 
 
 
-function makeQuery($conn,$prep,$params,$makeResults=true) {
+function makeQuery($conn, $prep, $params, $makeResults=true) {
     try {
-        if (count($params)) {
+        if(count($params)){
             $stmt = $conn->prepare($prep);
             $stmt->execute($params);
-        } else {
+        }else{
             $stmt = $conn->query($prep);
         }
 
@@ -34,11 +33,10 @@ function makeQuery($conn,$prep,$params,$makeResults=true) {
         return [
             "result"=>$result
         ];
-    } catch (PDOException $e) {
-        return ["error"=>"Query Failed: ".$e->getMessage()];
+    } catch(PDOException $e) {
+        return ["error" => "Query Failed: ".$e->getMessage()];
     }
 }
-
 
 function makeUpload($file, $folder) {
     $filename = microtime(true) . "_" . $_FILES[$file]['name'];
@@ -54,95 +52,124 @@ function makeUpload($file, $folder) {
 }
 
 
-function makeStatement($data) {
+
+
+
+function makeStatement($data){
     $conn = makeConn();
-    $type = @$data->type;
-    $params = @$data->params;
+    $type = @$data -> type;
+    $params = @$data -> params;
 
     switch($type) {
-        // case "users_all":
-        //     return makeQuery($conn, "SELECT * FROM `track_202290_users`", $params);
-        // case "animals_all":
-        //     return makeQuery($conn, "SELECT * FROM `track_202290_animals`", $params);
-        // case "locations_all":
-        //     return makeQuery($conn, "SELECT * FROM `track_202290_locations`", $params);
-            
+        case "users_all":
+            return makeQuery($conn, "SELECT * FROM `track_users`", $params);
+        case "trash_all":
+            return makeQuery($conn, "SELECT * FROM `track_trash`", $params);
+        case "locations_all":
+            return makeQuery($conn, "SELECT * FROM `track_locations`", $params);
+
+
         case "user_by_id":
-            return makeQuery($conn, "SELECT `id`,`name`,`email`,`username`,`img`,`date_create` FROM `track_202290_users` WHERE `id`=?", $params);
-        case "animal_by_id":
-            return makeQuery($conn, "SELECT * FROM `track_202290_animals` WHERE `id`=?", $params);
+            return makeQuery($conn, "SELECT id,name,email,username,img,date_create FROM `track_users` WHERE `id` = ?", $params);
+        case "trash_by_id":
+            return makeQuery($conn, "SELECT * FROM `track_trash` WHERE `id` = ?", $params);
         case "location_by_id":
-            return makeQuery($conn, "SELECT * FROM `track_202290_locations` WHERE `id`=?", $params);
+            return makeQuery($conn, "SELECT * FROM `track_locations` WHERE `id` = ?", $params);
 
-        
-        case "animals_by_user_id":
-            return makeQuery($conn, "SELECT * FROM `track_202290_animals` WHERE `user_id`=?", $params);        
+        case "hijab_by_id":
+            return makeQuery($conn, "SELECT * FROM `hijab_shows` WHERE `id` = ?", $params);
+
         case "locations_by_animal_id":
-            return makeQuery($conn, "SELECT * FROM `track_202290_locations` WHERE `animal_id`=?", $params);
+            return makeQuery($conn, "SELECT * FROM `hijab_shows` WHERE `id` != ?", $params);
 
-        
+        case "trash_by_user_id":
+            return makeQuery($conn, "SELECT * FROM `track_trash` WHERE `user_id` = ?", $params);
 
-        case "animal_locations_by_user_id":
-            return makeQuery($conn, "SELECT *
-            FROM `track_202290_animals` a
-            JOIN (
-                SELECT * FROM `track_202290_locations`
+        case "locations_by_trash_id":
+            return makeQuery($conn, "SELECT * FROM `track_locations` WHERE `trash_id` = ?", $params);
+
+        case "check_signin":
+            return makeQuery($conn, "SELECT `id` from `track_users` WHERE `username`=? AND `password` = md5(?)", $params);
+
+
+            case "animal_by_show":
+            return makeQuery($conn, "SELECT id,name,body,img,data_show,category FROM `hijab_shows` WHERE `user_id` = ?", $params);
+
+
+        case "animals_by_user_id":
+            return makeQuery($conn, "SELECT * FROM `hijab_shows` WHERE `user_id`=?", $params);
+
+
+        case "locations_by_hijab_id":
+            return makeQuery($conn,"SELECT * FROM `locations` WHERE `hijab_id`=?", $params);
+
+
+//        case "animal_locations_by_user_id":
+//            return makeQuery($conn, "SELECT *
+//            FROM `hijab_shows` a
+//            JOIN (
+//                SELECT * FROM `locations`
+//            ) l
+//            ON a.id = l.hijab_id
+//            WHERE `user_id`=?
+//            ", $params);
+//
+//        case "recent_hijab_locations":
+//            return makeQuery($conn, "SELECT *
+//            FROM `hijab_shows` a
+//            JOIN (
+//                SELECT lg.*
+//                FROM `locations` lg
+//                WHERE lg.id = (
+//                    SELECT lt.id
+//                    FROM `locations` lt
+//                    WHERE lt.hijab_id = lg.hijab_id
+//                    ORDER BY lt.date_create DESC
+//                    LIMIT 1
+//                )
+//            ) l
+//            ON a.id = l.hijab_id
+//            WHERE `user_id`=?
+//            ORDER BY l.hijab_id, l.date_create DESC
+//            ", $params);
+
+        case "recent_hijab_locations":
+            return makeQuery($conn,"SELECT *
+            FROM `hijab_shows` a
+            RIGHT JOIN (
+               SELECT * FROM `locations`
+               ORDER BY `date_create` DESC
             ) l
-            ON a.id = l.animal_id
-            WHERE `user_id`=?
-            ", $params);
-
-        case "recent_animal_locations":
-            return makeQuery($conn, "SELECT *
-            FROM `track_202290_animals` a
-            JOIN (
-                SELECT lg.*
-                FROM `track_202290_locations` lg
-                WHERE lg.id = (
-                    SELECT lt.id
-                    FROM `track_202290_locations` lt
-                    WHERE lt.animal_id = lg.animal_id
-                    ORDER BY lt.date_create DESC
-                    LIMIT 1
-                )
-            ) l
-            ON a.id = l.animal_id
-            WHERE `user_id`=?
-            ORDER BY l.animal_id, l.date_create DESC
-            ", $params);
+            ON a.id = l.hijab_id
+            WHERE a.user_id=?
+            GROUP BY l.hijab_id
+            ",$params);
 
 
-        case "search_animals":
-            return makeQuery($conn, "SELECT *
-            FROM `track_202290_animals`
-            WHERE 
-                `name` LIKE ? AND
-                `user_id` = ?
-            ", $params);
+
 
         case "filter_animals":
             return makeQuery($conn, "SELECT *
-            FROM `track_202290_animals`
+            FROM `hijab_shows`
             WHERE 
                 `$params[0]` = ? AND
                 `user_id` = ?
             ", [$params[1],$params[2]]);
 
-
-
         /* INSERT */
 
         case "insert_user":
             $result = makeQuery($conn, "SELECT `id`
-            FROM `track_202290_users`
+            FROM `track_users`
             WHERE `username`=? OR `email`=?
             ", [$params[0],$params[1]]);
             if (count($result['result']) > 0)
                 return ["error"=>"Username or Email already exists"];
 
             $result = makeQuery($conn, "INSERT INTO
-            `track_202290_users`
+            `track_users`
             (
+                `name`,
                 `username`,
                 `email`,
                 `password`,
@@ -151,6 +178,7 @@ function makeStatement($data) {
             )
             VALUES
             (
+                ?,
                 ?,
                 ?,
                 md5(?),
@@ -162,21 +190,19 @@ function makeStatement($data) {
             if (isset($result['error'])) return $result;
             return ["id" => $conn->lastInsertId()];
 
-        case "insert_animal":
+        case "insert_hijab":
             $result = makeQuery($conn, "INSERT INTO
-            `track_202290_animals`
+            `hijab_shows`
             (
                 `user_id`,
                 `name`,
-                `type`,
-                `breed`,
-                `description`,
+                `body`,
+                `category`,
                 `img`,
-                `date_create`
+                `data_show`
             )
             VALUES
             (
-                ?,
                 ?,
                 ?,
                 ?,
@@ -189,11 +215,78 @@ function makeStatement($data) {
             if (isset($result['error'])) return $result;
             return ["result"=>"Success"];
 
+
+
+
+        /* DELETE */
+
+
+        case "delete_animal":
+            $result = makeQuery($conn, "DELETE FROM
+            `hijab_shows`
+            WHERE `id` = ?
+            ", $params, false);
+
+            if (isset($result['error'])) return $result;
+            return ["result"=>"Success"];
+
+        /* search hijab */
+        case "search_hijab":
+            return makeQuery($conn, "SELECT *
+            FROM `hijab_shows`
+            WHERE 
+                `name` LIKE ? AND
+                `user_id` = ?
+            ", $params);
+
+        /* Hijab Update */
+
+        case "update_hijab":
+            $result = makeQuery($conn, "UPDATE 
+            `hijab_shows` 
+            SET 
+                `name` = ?,
+                `body` = ?,
+                `img` = ?
+                WHERE `id` = ? 
+                ", $params, false);
+
+            if (isset($result['error'])) return $result;
+            return ["result"=>"Success"];
+
+        /* update_password */
+
+        case "update_password":
+            $result = makeQuery($conn, "UPDATE
+            `track_users`
+            SET
+                `password` = md5(?)
+            WHERE `id` = ?
+            ", $params, false);
+
+            if (isset($result['error'])) return $result;
+            return ["result"=>"Success"];
+
+        /* UPLOAD */
+        case "update_user_photo":
+            $result = makeQuery($conn, "UPDATE
+            `track_users`
+            SET `img` = ?
+            WHERE `id` = ?
+            ", $params, false);
+
+            if (isset($result['error'])) return $result;
+            return ["result"=>"Success"];
+
+        default:
+            return ["error"=>"No Matched Type"];
+
+
         case "insert_location":
             $result = makeQuery($conn, "INSERT INTO
-            `track_202290_locations`
+            `locations`
             (
-                `animal_id`,
+                `hijab_id`,
                 `lat`,
                 `lng`,
                 `description`,
@@ -216,16 +309,9 @@ function makeStatement($data) {
             if (isset($result['error'])) return $result;
             return ["result"=>"Success"];
 
-
-
-
-
-
-        /* UPDATE */
-
         case "update_user":
             $result = makeQuery($conn, "UPDATE
-            `track_202290_users`
+            `track_users`
             SET
                 `name` = ?,
                 `username` = ?,
@@ -235,79 +321,7 @@ function makeStatement($data) {
 
             if (isset($result['error'])) return $result;
             return ["result"=>"Success"];
-            
-        case "update_password":
-            $result = makeQuery($conn, "UPDATE
-            `track_202290_users`
-            SET
-                `password` = md5(?)
-            WHERE `id` = ?
-            ", $params, false);
 
-            if (isset($result['error'])) return $result;
-            return ["result"=>"Success"];
-
-        case "update_animal":
-            $result = makeQuery($conn, "UPDATE
-            `track_202290_animals`
-            SET
-                `name` = ?,
-                `type` = ?,
-                `breed` = ?,
-                `description` = ?,
-                `img` = ?
-            WHERE `id` = ?
-            ", $params, false);
-
-            if (isset($result['error'])) return $result;
-            return ["result"=>"Success"];
-
-        
-    
-
-        /* UPLOAD */
-        case "update_user_photo":
-            $result = makeQuery($conn, "UPDATE
-            `track_202290_users`
-            SET `img` = ?
-            WHERE `id` = ?
-            ", $params, false);
-
-            if (isset($result['error'])) return $result;
-            return ["result"=>"Success"];
-
-
-
-            
-        /* DELETE */
-
-
-        case "delete_animal":
-            $result = makeQuery($conn, "DELETE FROM
-            `track_202290_animals`
-            WHERE `id` = ?
-            ", $params, false);
-
-            if (isset($result['error'])) return $result;
-            return ["result"=>"Success"];
-
-        case "delete_location":
-            $result = makeQuery($conn, "DELETE FROM
-            `track_202290_locations`
-            WHERE `id` = ?
-            ", $params, false);
-
-            if (isset($result['error'])) return $result;
-            return ["result"=>"Success"];
-
-        
-
-        case "check_signin":
-            return makeQuery($conn, "SELECT `id` FROM `track_202290_users` WHERE `username`=? AND `password` = md5(?)", $params);
-
-
-        default:
-            return ["error"=>"No Matched Type"];
     }
 }
 
@@ -316,11 +330,11 @@ if (!empty($_FILES)) {
     die(json_encode($result));
 }
 
-$data = json_decode(file_get_Contents("php://input"));
+$data = json_decode(file_get_contents("php://input"));
 
 die(
-    json_encode(
-        makeStatement($data),
-        JSON_NUMERIC_CHECK
-    )
+json_encode(
+    makeStatement($data),
+    JSON_NUMERIC_CHECK
+)
 );

@@ -1,14 +1,15 @@
 import { query } from "./functions.js";
-import { makeAnimalList } from "./parts.js";
+import {makeAnimalList, makeAnimalProfilePage} from "./parts.js";
 
 
 
 export const checkSignupForm = () => {
+    let name = $("#signup-name").val();
     let username = $("#signup-username").val();
     let email = $("#signup-email").val();
     let password = $("#signup-password").val();
     let confirm = $("#signup-confirm").val();
-    
+
     if (password !== confirm) {
         // tell user to try again
         throw("password failed, show the user");
@@ -18,6 +19,7 @@ export const checkSignupForm = () => {
     query({
         type: 'insert_user',
         params: [
+            name,
             username,
             email,
             password
@@ -28,7 +30,7 @@ export const checkSignupForm = () => {
             // We should show how they failed to them
         } else {
             sessionStorage.userId = data.id;
-            $.mobile.navigate("#list-page");
+            $.mobile.navigate("#first-page");
         }
     })
 }
@@ -79,9 +81,10 @@ export const checkPasswordEditForm = () => {
         }
     })
 }
+
 export const checkUserEditPhotoForm = () => {
     let photo = $("#user-edit-photo-image").val();
-    
+
     query({
         type: 'update_user_photo',
         params: [
@@ -102,21 +105,19 @@ export const checkUserEditPhotoForm = () => {
 
 
 export const checkAnimalAddForm = () => {
-    let name = $("#animal-add-name").val();
-    let type = $("#animal-add-type").val();
-    let breed = $("#animal-add-breed").val();
-    let description = $("#animal-add-description").val();
-    let image = $("#animal-add-photo-image").val();
-    
+    let name = $("#hijab-add-name").val();
+    let body = $("#hijab-add-body").val();
+    let img = $("#hijab-add-img").val();
+    let category = $("#hijab-add-cate").val();
+
     query({
-        type: 'insert_animal',
+        type: 'insert_hijab',
         params: [
             sessionStorage.userId,
             name,
-            type,
-            breed,
-            description,
-            image
+            body,
+            category,
+            img,
         ]
     }).then((data)=>{
         if (data.error) {
@@ -126,22 +127,20 @@ export const checkAnimalAddForm = () => {
         }
     })
 }
-export const checkAnimalEditForm = () => {
-    let name = $("#animal-edit-name").val();
-    let type = $("#animal-edit-type").val();
-    let breed = $("#animal-edit-breed").val();
-    let description = $("#animal-edit-description").val();
-    let image = $("#animal-edit-photo-image").val();
-    
+
+
+export const checkHijabEditForm = () => {
+    let name = $("#hijab-edit-name").val();
+    let body = $("#hijab-edit-body").val();
+    let img = $("#hijab-edit-img").val();
+
     query({
-        type: 'update_animal',
+        type: 'update_hijab',
         params: [
             name,
-            type,
-            breed,
-            description,
-            image,
-            sessionStorage.animalId
+            body,
+            img,
+            sessionStorage.animalID
         ]
     }).then((data)=>{
         if (data.error) {
@@ -151,10 +150,11 @@ export const checkAnimalEditForm = () => {
         }
     })
 }
+
 export const checkAnimalDeleteForm = () => {
     query({
         type:"delete_animal",
-        params:[sessionStorage.animalId]
+        params:[sessionStorage.animalID]
     }).then((data)=>{
         if (data.error) {
             throw(data.error);
@@ -174,10 +174,10 @@ export const checkLocationAddForm = () => {
 
     let back = +$("#location-back").val();
 
-    
+
     query({
         type:"insert_location",
-        params:[animalid,lat,lng,description]
+        params:[sessionStorage.animalID,lat,lng,description]
     }).then((data)=>{
         if (data.error) {
             throw(data.error);
@@ -193,17 +193,18 @@ export const checkLocationAddForm = () => {
 
 export const checkListSearchForm = (search) => {
     query({
-        type:"search_animals",
+        type:"search_hijab",
         params:[`%${search}%`,sessionStorage.userId]
     }).then((data)=>{
         if (data.error) {
             throw(data.error);
         } else {
             let {result} = data;
-            $("#list-page .animallist").html(makeAnimalList(result))
+            $("#first-page .BodyServiceTopMenuAllPetPageShowIconSearch").html(makeAnimalProfilePage(result))
         }
     })
 }
+
 export const checkListFilter = (filter,value) => {
     query({
         type:"filter_animals",
@@ -213,7 +214,7 @@ export const checkListFilter = (filter,value) => {
             throw(data.error);
         } else {
             let {result} = data;
-            $("#list-page .animallist").html(makeAnimalList(result));
+            $("#first-page .BodyServiceTopMenuAllPetPageShowIconSearch").html(makeAnimalList(result));
         }
     })
 }

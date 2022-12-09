@@ -5,18 +5,18 @@ export const query = (options) => {
         method: 'POST',
         body: JSON.stringify(options)
     }).then((d)=>d.json())
-    .then((d)=>{
-        if (d.error) throw(d.error);
-        else return d;
-    });
+        .then((d)=>{
+            if (d.error) throw(d.error);
+            else return d;
+        });
 }
 
 // Curried function
-export const templater = (f) => (a) => 
+export const templater = (f) => (a) =>
     (Array.isArray(a) ? a : [a])
-    .reduce((r,o,i,a) => r+f(o,i,a), '');
+        .reduce((r,o,i,a) => r+f(o,i,a), '');
 
-    
+
 export const checkData = (exterior_check) => new Promise((resolve,reject)=>{
     let timeout = 0;
     const interior_check = () => {
@@ -35,8 +35,8 @@ export const checkUpload = (file) => {
         method: "POST",
         body: fd,
     }).then((d)=>d.json())
-    .then((d)=>{
-        if (d.error) throw(d.error);
-        else return d;
-    })
+        .then((d)=>{
+            if (d.error) throw(d.error);
+            else return d;
+        })
 }

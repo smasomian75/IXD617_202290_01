@@ -1,52 +1,61 @@
 import { templater } from "./functions.js";
 
+export const makeTrashList = templater(({id,name,type,weight,img})=>`
+      
+`)
 
-export const makeAnimalList = templater(({id,name,type,breed,img})=>`
-<a class="animallist-item animal-jump" href="#animal-profile-page" data-id="${id}">
-    <div class="animallist-image"><img src="${img}"></div>
-    <div class="animallist-body">
-        <div class="animallist-name">${name}</div>
-        <div class="animallist-type">${type}</div>
-        <div class="animallist-breed">${breed}</div>
-    </div>
-</a>
+
+export const makeAnimalList = templater(({id,name,body,img})=>`
+   <a href="#show-page" class="animalJump" data-id="${id}">
+                <div class="BodyServiceTopMenuAllPetPageShowIconSearchPet">
+                    <div class="ImageServiceTopClass">
+                        <img src="${img}" alt="">
+                    </div>
+                    <div class="TextServiceTopClass">
+                        <h1>${name}</h1>
+                        <p>${body}</p>
+                    </div>
+
+                    <div class="BottomBodyServiceTopMenuAllPetPageShowIconSearchPet">
+                        Show to me
+                    </div>
+                </div>
+
+            </a>
+
 `)
 
 export const makeUserProfilePage = ({name,email,username,img})=>`
-<div>
-    <div class="user-profile-image"><a href="#user-edit-photo-page"><img src="${img}"></a></div>
-    <div class="user-profile-body">
-        <div class="user-profile-name">${name}</div>
-        <div class="user-profile-breed">@${username}</div>
-        <div class="user-profile-email">${email}</div>
-    </div>
-</div>
+  
+            <div class="TopMenuAllPetPageShowIconP">
+                <p>Hello</p>
+                <span>${name}</span>
+            </div>
+
+            <div class="ImgTopMenuAllPetPageShowIcon">
+                <img src="${img}" alt="">
+            </div>
+  
 `
 
-export const makeAnimalProfileDescription = ({name,type,breed})=>`
-<h2>${name}</h2>
-<div>${type}</div>
-<div>${breed}</div>
+export const makeUserProfilePage1 = ({name,email,username,img})=>`
+  
+            <div class="ImageShowOtherPageToUserShow">
+               <a href="#user-edit-photo-page">
+                <div class="imgImageShowOtherPageToUserShow">
+                    <img src="${img}" alt="">
+                </div>
+                </a>
+                <p>name : ${name}</p>
+                <p>username : ${username}</p>
+                <p>email : ${email}</p>
+            </div>
+  
 `
-
-
-export const makeAnimalMapDescription = ({name,type,breed,img}) => {
-    return `<div class="animal-map-description display-flex">
-        <div class="animal-map-image">
-            <img src="${img}" />
-        </div>
-        <div class="animal-map-body">
-            <h1>${name}</h1>
-            <div>${type}</div>
-            <div>${breed}</div>
-        </div>
-    </div>`;
-}
-
 
 
 export const makeEditUserForm = ({name,username,email}) => {
-    
+
     return `<div class="form-control">
         <label class="form-label" for="user-edit-username">Username</label>
         <input class="form-input" type="text" id="user-edit-username" data-role="none" placeholder="Type your Username" value="${username}">
@@ -62,6 +71,74 @@ export const makeEditUserForm = ({name,username,email}) => {
 }
 
 
+export const makeAnimalProfilePage = templater(({name,body,id,img,years,gender,location,data_show})=>`
+           <a href="#show-page" class="animalJump" data-id="${id}">
+                <div class="BodyServiceTopMenuAllPetPageShowIconSearchPet">
+                    <div class="ImageServiceTopClass">
+                        <img src="${img}" alt="">
+                    </div>
+                    <div class="TextServiceTopClass">
+                        <h1>${name}</h1>
+                        <p>${body}</p>
+                    </div>
+
+                    <div class="BottomBodyServiceTopMenuAllPetPageShowIconSearchPet">
+                        Show to me
+                    </div>
+                </div>
+
+            </a>
+            
+            
+`)
+
+
+
+export const makeAnimalProfileDescription = ({name,img,body,pirce,years,gender})=>`
+   <div class="ImgTopMenuAllPetPageShow1">
+                <img src="${img}" alt="">
+            </div>
+
+<div id="description" class="tabcontent">
+   <div class="NavTabShowToHijab">
+           <div onclick="openCity(event, 'map')" class="ChildNavTabShowToHijab tablinks">Map</div>
+       
+           <div style="background: #7E719C; color: white" onclick="openCity(event, 'description')" class="ChildNavTabShowToHijab tablinks">Description</div>
+        </div>
+        
+    <h1>${name}</h1>
+
+            <div class="BodyTopMenuAllPetPageShow1">
+                <h2>Description :</h2>
+                <p>
+                    ${body}
+                </p>
+            </div>
+            
+</div>
+
+<div style="display:block; position: relative; height: 560px" id="map" class="tabcontent">
+        <div class="NavTabShowToHijab">
+           <div style="background: #7E719C; color: white" onclick="openCity(event, 'map')" class="ChildNavTabShowToHijab">Map</div>
+       
+           <div onclick="openCity(event, 'description')" class="ChildNavTabShowToHijab">Description</div>
+        </div>
+        
+        <div class="map"></div>
+        
+          <a href="#choose-animal-page">
+            <div class="AddNewLocationMap">
+                <i class="icon-plus"></i>
+            </div>
+        </a>
+</div>
+
+       
+
+<!--            <div class="ButtonBodyTopMenuAllPetPageShow1">-->
+<!--                s-->
+<!--            </div>-->
+`
 
 
 const FormControlInput = ({namespace,name,displayname,type,placeholder,value}) => {
@@ -77,65 +154,88 @@ const FormControlTextarea = ({namespace,name,displayname,placeholder,value}) => 
     </div>`
 }
 
+const FormControlSelect = ({namespace,name,displayname,placeholder,value}) => {
+    return `<div class="form-control">
+        <label class="form-label" for="${namespace}-${name}">${displayname}</label>
+        <select class="form-input" id="${namespace}-${name}" data-role="none">
+            <option>Headscarf</option>
+            <option>Niqab</option>
+            <option>Burqa</option>
+            <option>Chador</option>
+        </select>
+    </div>`
+}
 
 export const makeEditAnimalForm = ({animal,namespace}) => {
     return `
-    <div class="form-control">
-        <input type="hidden" id="${namespace}-photo-image" value="${animal.img??""}">
-        <label class="imagepicker replace thumbnail ${animal.img?"picked":""}" style="background-image:url('${animal.img}')">
-            <input type="file" id="${namespace}-photo-input" data-role="none" class="hidden">
-        </label>
-    </div>
     ${FormControlInput({
         namespace,
         name: "name",
         displayname: "Name",
         type: "text",
-        placeholder: "Type a Name",
+        placeholder: "",
         value: animal.name
     })}
+   
     ${FormControlInput({
         namespace,
-        name: "type",
-        displayname: "Type",
+        name: "img",
+        displayname: "Img Link",
         type: "text",
-        placeholder: "Type a Type",
-        value: animal.type
-    })}
-    ${FormControlInput({
+        placeholder: "",
+        value: animal.img
+    })}  
+      
+      
+      ${FormControlSelect({
         namespace,
-        name: "breed",
-        displayname: "Breed",
+        name: "cate",
+        displayname: "Category",
+        type: "select",
+        placeholder: "",
+        value: animal.img
+    })}
+    
+      ${FormControlTextarea({
+        namespace,
+        name: "body",
+        displayname: "Body",
         type: "text",
-        placeholder: "Type a Breed",
-        value: animal.breed
+        placeholder: "",
+        value: animal.body
     })}
-    ${FormControlTextarea({
-        namespace,
-        name: "description",
-        displayname: "Description",
-        placeholder: "Type a Description",
-        value: animal.description
-    })}
+   
     `;
 }
 
 
 
+export const makeAnimalMapDescription = ({name,body,category,img}) => {
+    return `<div class="animal-map-description display-flex">
+        <div class="animal-map-image">
+            <img src="${img}" />
+        </div>
+        <div class="animal-map-body">
+            <h1>${name}</h1>
+            <div>${body}</div>
+            <div>${category}</div>
+        </div>
+    </div>`;
+}
+
 
 
 const filterList = (animals,type) => {
     let arr = [...(new Set(animals.map(o=>o[type])))];
-    return templater(o=>o?`<span data-filter="${type}" data-value="${o}">${o}</span>`:'')(arr);
+    return templater(o=>o?`<div class="ChildListAndClickForCustomer" data-filter="${type}" data-value="${o}">${o}</div>`:'')(arr);
 }
-
 
 export const makeFilterList = (animals) => {
     return `
-        <span data-filter="type" data-value="">All</span>
-        |
-        ${filterList(animals,'type')}
-        |
-        ${filterList(animals,'breed')}
+
+        <div data-filter="type" data-value="" style="border-right: 1px solid white; padding-right:  15px" class="ChildListAndClickForCustomer">All</div>
+
+        ${filterList(animals,'category')}
+       
     `
 }

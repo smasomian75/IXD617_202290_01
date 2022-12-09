@@ -32,7 +32,7 @@ export const makeMarkers = (map_el,marker_locs=[]) => {
             position: location,
             map,
             icon: {
-                url:location.icon??'images/icons/marker.svg',
+                url:location.icon,
                 scaledSize: {
                     width:40,
                     height:40,
