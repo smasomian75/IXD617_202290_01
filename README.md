@@ -11,3 +11,7 @@
 - http://smasomian75.com/aau/IXD617/profile/
 - http://smasomian75.com/aau/IXD617/csszengarden/
 - http://smasomian75.com/
+
+#### Screenshots
+- https://github.com/smasomian75/IXD617_202290_01/tree/main/screenshots/final
+- https://github.com/smasomian75/IXD617_202290_01/tree/main/screenshots/midterm
